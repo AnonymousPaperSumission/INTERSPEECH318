@@ -48,32 +48,42 @@
       border-color: #007bff;
     }
 
-    /* 音频列表 - 平铺展示 */
+    /* 音频列表 - 平铺展示（优化网格布局） */
     .audio-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 15px;
+      /* 确保网格容器完整占据宽度 */
+      width: 100%;
     }
 
     .audio-item {
       padding: 10px;
       border: 1px solid #eee;
+      /* 确保item是块级，适配grid布局 */
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .audio-item h3 {
       font-size: 16px;
-      margin-bottom: 5px;
       color: #555;
+      /* 防止标题换行导致高度不一致 */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .audio-item .meta {
       font-size: 12px;
       color: #999;
-      margin-bottom: 10px;
     }
 
     audio {
       width: 100%;
+      /* 音频控件最小高度，避免布局跳动 */
+      min-height: 40px;
     }
 
     footer {
@@ -100,7 +110,7 @@
     <button class="filter-btn" data-filter="scnet">SCNet</button>
   </div>
 
-  <!-- 平铺音频列表 -->
+  <!-- 唯一的音频列表容器（修复核心问题） -->
   <div class="audio-list" id="audioList">
     <!-- Cinema Paradiso - Piano - Ground Truth -->
     <div class="audio-item" data-tags="song1 piano groundtruth">
@@ -176,11 +186,8 @@
       </audio>
     </div>
 
-    <!-- Song 2 - Piano - Ground Truth -->
-  <!-- 平铺音频列表 -->
-  <div class="audio-list" id="audioList">
-    <!-- Happy Farmer(Test Track039) - Piano - Ground Truth -->
-    <div class="audio-item" data-tags="song1 piano groundtruth">
+    <!-- Happy Farmer(Test Track039) - Piano - Ground Truth（修复tags为song2） -->
+    <div class="audio-item" data-tags="song2 piano groundtruth">
       <h3>Happy Farmer - Piano</h3>
       <div class="meta">Type: Ground Truth | Clip: 1</div>
       <audio controls preload="none">
@@ -189,7 +196,7 @@
       </audio>
     </div>
 
-    <div class="audio-item" data-tags="song1 piano proposed">
+    <div class="audio-item" data-tags="song2 piano proposed">
       <h3>Happy Farmer - Piano</h3>
       <div class="meta">Type: Proposed | Clip: 1</div>
       <audio controls preload="none">
@@ -198,7 +205,7 @@
       </audio>
     </div>
 
-    <div class="audio-item" data-tags="song1 piano bsroformer">
+    <div class="audio-item" data-tags="song2 piano bsroformer">
       <h3>Happy Farmer - Piano</h3>
       <div class="meta">Type: BSRoFormer | Clip: 1</div>
       <audio controls preload="none">
@@ -207,7 +214,7 @@
       </audio>
     </div>
 
-    <div class="audio-item" data-tags="song1 piano scnet">
+    <div class="audio-item" data-tags="song2 piano scnet">
       <h3>Happy Farmer - Piano</h3>
       <div class="meta">Type: SCNet | Clip: 1</div>
       <audio controls preload="none">
@@ -216,8 +223,8 @@
       </audio>
     </div>
 
-    <!-- Song 1 - Violin - Ground Truth -->
-    <div class="audio-item" data-tags="song1 violin groundtruth">
+    <!-- Happy Farmer - Violin（修复tags为song2） -->
+    <div class="audio-item" data-tags="song2 violin groundtruth">
       <h3>Happy Farmer- Violin</h3>
       <div class="meta">Type: Ground Truth | Clip: 1</div>
       <audio controls preload="none">
@@ -226,7 +233,7 @@
       </audio>
     </div>
 
-    <div class="audio-item" data-tags="song1 violin proposed">
+    <div class="audio-item" data-tags="song2 violin proposed">
       <h3>Happy Farmer - Violin</h3>
       <div class="meta">Type: Proposed | Clip: 1</div>
       <audio controls preload="none">
@@ -235,7 +242,7 @@
       </audio>
     </div>
 
-    <div class="audio-item" data-tags="song1 violin bsroformer">
+    <div class="audio-item" data-tags="song2 violin bsroformer">
       <h3>Happy Farmer - Violin</h3>
       <div class="meta">Type: BSRoFormer | Clip: 1</div>
       <audio controls preload="none">
@@ -244,7 +251,7 @@
       </audio>
     </div>
 
-    <div class="audio-item" data-tags="song1 violin scnet">
+    <div class="audio-item" data-tags="song2 violin scnet">
       <h3>Happy Farmer - Violin</h3>
       <div class="meta">Type: SCNet | Clip: 1</div>
       <audio controls preload="none">
@@ -252,6 +259,7 @@
         Your browser does not support audio playback.
       </audio>
     </div>
+  </div> <!-- 闭合唯一的audio-list容器 -->
 
   <footer>
     Audio files stored in: Audio_Demos folder | Powered by GitHub Pages
@@ -270,10 +278,10 @@
         
         const filter = btn.dataset.filter;
         
-        // 筛选音频项
+        // 筛选音频项（适配grid布局，用grid-item而非block）
         audioItems.forEach(item => {
           const tags = item.dataset.tags;
-          item.style.display = filter === 'all' || tags.includes(filter) ? 'block' : 'none';
+          item.style.display = filter === 'all' || tags.includes(filter) ? 'grid-item' : 'none';
         });
       });
     });
