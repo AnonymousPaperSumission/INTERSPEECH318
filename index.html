@@ -3,93 +3,280 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My GitHub Pages</title>
+  <title>Audio Demos</title>
   <style>
-    :root {
-      --bg: #f5f7fb;
-      --card: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --primary: #2563eb;
-    }
-
+    /* 基础重置 */
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .card {
-      width: 100%;
-      max-width: 680px;
-      background: var(--card);
-      border-radius: 16px;
-      padding: 32px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      text-align: center;
-    }
-
+    /* 标题 */
     h1 {
-      margin: 0 0 12px;
-      font-size: 2rem;
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
     }
 
-    p {
-      margin: 0 0 20px;
-      color: var(--muted);
-      line-height: 1.7;
+    /* 筛选按钮 - 简单排列 */
+    .filter-group {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
     }
 
-    .btn {
-      display: inline-block;
-      text-decoration: none;
-      background: var(--primary);
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 10px;
-      font-weight: 600;
-      transition: transform 0.15s ease, opacity 0.15s ease;
+    .filter-btn {
+      margin-right: 10px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+      font-size: 14px;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      opacity: 0.95;
+    .filter-btn.active {
+      background: #007bff;
+      color: white;
+      border-color: #007bff;
     }
 
-    .footer {
-      margin-top: 18px;
-      font-size: 0.9rem;
-      color: var(--muted);
+    /* 音频列表 - 平铺展示 */
+    .audio-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 15px;
     }
 
-    code {
-      background: #eef2ff;
-      color: #3730a3;
-      padding: 2px 6px;
-      border-radius: 6px;
+    .audio-item {
+      padding: 10px;
+      border: 1px solid #eee;
+    }
+
+    .audio-item h3 {
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .audio-item .meta {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 10px;
+    }
+
+    audio {
+      width: 100%;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #999;
     }
   </style>
 </head>
 <body>
-  <main class="card">
-    <h1>Hello, GitHub Pages!</h1>
-    <p>
-      The page is still being decorated! Just wait a moment :) It will be ready by March 20th.
-      Audio Demos are stored in the folder: "Audio Demos"
-    </p>
-    <a class="btn" href="https://github.com/" target="_blank" rel="noopener noreferrer">
-      Visit GitHub
-    </a>
-    <div class="footer">Powered by GitHub Pages</div>
-  </main>
+  <h1>Audio Demos</h1>
+  <p>Validation and Test × 8 Clips (Piano/Violin | 4 Samples: Ground Truth, Proposed, BSROFormer, SCNet)</p>
+
+  <!-- 简单筛选按钮 -->
+  <div class="filter-group">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="song1">Validation</button>
+    <button class="filter-btn" data-filter="song2">Test</button>
+    <button class="filter-btn" data-filter="piano">Piano</button>
+    <button class="filter-btn" data-filter="violin">Violin</button>
+    <button class="filter-btn" data-filter="groundtruth">Ground Truth</button>
+    <button class="filter-btn" data-filter="proposed">Proposed</button>
+    <button class="filter-btn" data-filter="bsroformer">BSRoFormer</button>
+    <button class="filter-btn" data-filter="scnet">SCNet</button>
+  </div>
+
+  <!-- 平铺音频列表 -->
+  <div class="audio-list" id="audioList">
+    <!-- Cinema Paradiso(Valid) - Piano - Ground Truth -->
+    <div class="audio-item" data-tags="song1 piano groundtruth">
+      <h3>Cinema Paradiso - Piano</h3>
+      <div class="meta">Type: Ground Truth | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/GroundTruth_Cinema_Paradiso_Piano.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div class="audio-item" data-tags="song1 piano proposed">
+      <h3>Cinema Paradiso - Piano</h3>
+      <div class="meta">Type: Proposed | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/Proposed_Cinema_Paradiso_Piano.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div class="audio-item" data-tags="song1 piano bsroformer">
+      <h3>Cinema Paradiso - Piano</h3>
+      <div class="meta">Type: BSRoFormer | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/BSRoformer_Cinema_Paradiso_Piano.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div class="audio-item" data-tags="song1 piano scnet">
+      <h3>SCNet - Piano</h3>
+      <div class="meta">Type: SCNet | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/SCNet_Cinema_Paradiso_Piano.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <!-- Song 1 - Violin - Ground Truth -->
+    <div class="audio-item" data-tags="song1 violin groundtruth">
+      <h3>Cinema Paradiso(Valid) - Violin</h3>
+      <div class="meta">Type: Ground Truth | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/GroundTruth_Cinema_Paradiso_Violin.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div class="audio-item" data-tags="song1 violin proposed">
+      <h3>Cinema Paradiso - Violin</h3>
+      <div class="meta">Type: Proposed | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/Proposed_Cinema_Paradiso_Violin.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div class="audio-item" data-tags="song1 violin bsroformer">
+      <h3>Cinema Paradiso - Violin</h3>
+      <div class="meta">Type: BSRoFormer | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/BSRoformer_Cinema_Paradiso_Violin.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div class="audio-item" data-tags="song1 violin scnet">
+      <h3>Cinema Paradiso - Violin</h3>
+      <div class="meta">Type: SCNet | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/SCNet_Cinema_Paradiso_Violin.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <!-- Song 2 - Piano - Ground Truth -->
+  <!-- 平铺音频列表 -->
+  <div class="audio-list" id="audioList">
+    <!-- Happy Farmer(Test Track039) - Piano - Ground Truth -->
+    <div class="audio-item" data-tags="song1 piano groundtruth">
+      <h3>Happy Farmer - Piano</h3>
+      <div class="meta">Type: Ground Truth | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/GroundTruth_Track039_Piano.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div class="audio-item" data-tags="song1 piano proposed">
+      <h3>Happy Farmer - Piano</h3>
+      <div class="meta">Type: Proposed | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/Proposed_Track039_Piano.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div class="audio-item" data-tags="song1 piano bsroformer">
+      <h3>Happy Farmer - Piano</h3>
+      <div class="meta">Type: BSRoFormer | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/BSRoformer_Track039_Piano.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div class="audio-item" data-tags="song1 piano scnet">
+      <h3>SCNet - Piano</h3>
+      <div class="meta">Type: SCNet | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/SCNet_Track039_Piano.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <!-- Song 1 - Violin - Ground Truth -->
+    <div class="audio-item" data-tags="song1 violin groundtruth">
+      <h3>Cinema Paradiso(Valid) - Violin</h3>
+      <div class="meta">Type: Ground Truth | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/GroundTruth_Track039_Violin.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div class="audio-item" data-tags="song1 violin proposed">
+      <h3>Cinema Paradiso - Violin</h3>
+      <div class="meta">Type: Proposed | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/Proposed_Track039_Violin.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div class="audio-item" data-tags="song1 violin bsroformer">
+      <h3>Cinema Paradiso - Violin</h3>
+      <div class="meta">Type: BSRoFormer | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/BSRoformer_Track039_Violin.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <div class="audio-item" data-tags="song1 violin scnet">
+      <h3>Cinema Paradiso - Violin</h3>
+      <div class="meta">Type: SCNet | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/SCNet_Track039_Violin.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+  <footer>
+    Audio files stored in: Audio_Demos folder | Powered by GitHub Pages
+  </footer>
+
+  <script>
+    // 极简筛选功能
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const audioItems = document.querySelectorAll('.audio-item');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // 切换激活状态
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const filter = btn.dataset.filter;
+        
+        // 筛选音频项
+        audioItems.forEach(item => {
+          const tags = item.dataset.tags;
+          item.style.display = filter === 'all' || tags.includes(filter) ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
