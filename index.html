@@ -95,7 +95,7 @@
 </head>
 <body>
   <h1>Audio Demos</h1>
-  <p>Validation: Cinema Paradiso, Test: Happy Farmer(Track0.39), each for 8 Clips (Piano/Violin | 4 Samples: Ground Truth, Proposed, BSROFormer, SCNet)</p>
+  <p>Validation: Cinema Paradiso, Test: Happy Farmer(Track 039 from PFVN Dataset), each for 8 Clips (Piano/Violin | 4 Samples: Ground Truth, Proposed, BSRoFormer, SCNet)</p>
 
   <!-- 简单筛选按钮 -->
   <div class="filter-group">
@@ -110,23 +110,14 @@
     <button class="filter-btn" data-filter="scnet">SCNet</button>
   </div>
 
-  <!-- 唯一的音频列表容器（修复核心问题） -->
+  <!-- 唯一的音频列表容器 -->
   <div class="audio-list" id="audioList">
-    <!-- Cinema Paradiso - Piano - Ground Truth -->
+    <!-- ========== Cinema Paradiso - Piano 组（按 Ground Truth → BSRoFormer → SCNet → Proposed 排序） ========== -->
     <div class="audio-item" data-tags="song1 piano groundtruth">
       <h3>Cinema Paradiso - Piano</h3>
       <div class="meta">Type: Ground Truth | Clip: 1</div>
       <audio controls preload="none">
         <source src="Audio_Demos/GroundTruth_Cinema_Paradiso_Piano.mp3" type="audio/mpeg">
-        Your browser does not support audio playback.
-      </audio>
-    </div>
-
-    <div class="audio-item" data-tags="song1 piano proposed">
-      <h3>Cinema Paradiso - Piano</h3>
-      <div class="meta">Type: Proposed | Clip: 1</div>
-      <audio controls preload="none">
-        <source src="Audio_Demos/Proposed_Cinema_Paradiso_Piano.mp3" type="audio/mpeg">
         Your browser does not support audio playback.
       </audio>
     </div>
@@ -149,21 +140,21 @@
       </audio>
     </div>
 
-    <!-- Song 1 - Violin - Ground Truth -->
+    <div class="audio-item" data-tags="song1 piano proposed">
+      <h3>Cinema Paradiso - Piano</h3>
+      <div class="meta">Type: Proposed | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/Proposed_Cinema_Paradiso_Piano.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <!-- ========== Cinema Paradiso - Violin 组（按 Ground Truth → BSRoFormer → SCNet → Proposed 排序） ========== -->
     <div class="audio-item" data-tags="song1 violin groundtruth">
       <h3>Cinema Paradiso - Violin</h3>
       <div class="meta">Type: Ground Truth | Clip: 1</div>
       <audio controls preload="none">
         <source src="Audio_Demos/GroundTruth_Cinema_Paradiso_Violin.mp3" type="audio/mpeg">
-        Your browser does not support audio playback.
-      </audio>
-    </div>
-
-    <div class="audio-item" data-tags="song1 violin proposed">
-      <h3>Cinema Paradiso - Violin</h3>
-      <div class="meta">Type: Proposed | Clip: 1</div>
-      <audio controls preload="none">
-        <source src="Audio_Demos/Proposed_Cinema_Paradiso_Violin.mp3" type="audio/mpeg">
         Your browser does not support audio playback.
       </audio>
     </div>
@@ -186,21 +177,21 @@
       </audio>
     </div>
 
-    <!-- Happy Farmer(Test Track039) - Piano - Ground Truth（修复tags为song2） -->
+    <div class="audio-item" data-tags="song1 violin proposed">
+      <h3>Cinema Paradiso - Violin</h3>
+      <div class="meta">Type: Proposed | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/Proposed_Cinema_Paradiso_Violin.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <!-- ========== Happy Farmer - Piano 组（按 Ground Truth → BSRoFormer → SCNet → Proposed 排序） ========== -->
     <div class="audio-item" data-tags="song2 piano groundtruth">
       <h3>Happy Farmer - Piano</h3>
       <div class="meta">Type: Ground Truth | Clip: 1</div>
       <audio controls preload="none">
         <source src="Audio_Demos/GroundTruth_Track039_Piano.mp3" type="audio/mpeg">
-        Your browser does not support audio playback.
-      </audio>
-    </div>
-
-    <div class="audio-item" data-tags="song2 piano proposed">
-      <h3>Happy Farmer - Piano</h3>
-      <div class="meta">Type: Proposed | Clip: 1</div>
-      <audio controls preload="none">
-        <source src="Audio_Demos/Proposed_Track039_Piano.mp3" type="audio/mpeg">
         Your browser does not support audio playback.
       </audio>
     </div>
@@ -223,21 +214,21 @@
       </audio>
     </div>
 
-    <!-- Happy Farmer - Violin（修复tags为song2） -->
+    <div class="audio-item" data-tags="song2 piano proposed">
+      <h3>Happy Farmer - Piano</h3>
+      <div class="meta">Type: Proposed | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/Proposed_Track039_Piano.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    <!-- ========== Happy Farmer - Violin 组（按 Ground Truth → BSRoFormer → SCNet → Proposed 排序） ========== -->
     <div class="audio-item" data-tags="song2 violin groundtruth">
       <h3>Happy Farmer- Violin</h3>
       <div class="meta">Type: Ground Truth | Clip: 1</div>
       <audio controls preload="none">
         <source src="Audio_Demos/GroundTruth_Track039_Violin.mp3" type="audio/mpeg">
-        Your browser does not support audio playback.
-      </audio>
-    </div>
-
-    <div class="audio-item" data-tags="song2 violin proposed">
-      <h3>Happy Farmer - Violin</h3>
-      <div class="meta">Type: Proposed | Clip: 1</div>
-      <audio controls preload="none">
-        <source src="Audio_Demos/Proposed_Track039_Violin.mp3" type="audio/mpeg">
         Your browser does not support audio playback.
       </audio>
     </div>
@@ -259,7 +250,16 @@
         Your browser does not support audio playback.
       </audio>
     </div>
-  </div> <!-- 闭合唯一的audio-list容器 -->
+
+    <div class="audio-item" data-tags="song2 violin proposed">
+      <h3>Happy Farmer - Violin</h3>
+      <div class="meta">Type: Proposed | Clip: 1</div>
+      <audio controls preload="none">
+        <source src="Audio_Demos/Proposed_Track039_Violin.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+  </div> <!-- 闭合音频列表容器 -->
 
   <footer>
     Audio files stored in: Audio_Demos folder | Powered by GitHub Pages
@@ -278,10 +278,10 @@
         
         const filter = btn.dataset.filter;
         
-        // 筛选音频项（适配grid布局，用grid-item而非block）
+        // 筛选音频项（适配grid布局）
         audioItems.forEach(item => {
           const tags = item.dataset.tags;
-          item.style.display = filter === 'all' || tags.includes(filter) ? 'grid-item' : 'none';
+          item.style.display = filter === 'all' || tags.includes(filter) ? 'flex' : 'none';
         });
       });
     });
